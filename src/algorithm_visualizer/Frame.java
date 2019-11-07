@@ -1,18 +1,18 @@
 package algorithm_visualizer;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 public class Frame extends JFrame implements ActionListener{
 	public Frame() {
 		this.setTitle("Algorithm Visualizer");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.add(dropDownMenu(), BorderLayout.CENTER);
 	}
-	public JComboBox dropDownMenu() {
+	public JComboBox<String> dropDownMenu() {
 		String[] algorithms = {"Bubble Sort", "Merge Sort", "Quick Sort"};
-		JComboBox algorithmList = new JComboBox(algorithms);
+		JComboBox<String> algorithmList = new JComboBox<String>(algorithms);
 		algorithmList.setSelectedIndex(0);
 		algorithmList.addActionListener(this);
 		return algorithmList;
