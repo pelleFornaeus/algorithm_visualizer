@@ -15,8 +15,9 @@ public class ToolBar extends JFrame implements ActionListener, PropertyChangeLis
 	
 	public ToolBar() {
 		toolBar.setPreferredSize(new Dimension(600, 100));
-		toolBar.add(dropDownMenu(), BorderLayout.CENTER);
+		toolBar.add(dropDownMenu(), BorderLayout.EAST);
 		toolBar.add(boxAmount(), BorderLayout.WEST);
+		toolBar.add(randomizer(), BorderLayout.CENTER);
 	}
 	
 	private JComboBox<String> dropDownMenu() {
@@ -38,23 +39,53 @@ public class ToolBar extends JFrame implements ActionListener, PropertyChangeLis
 		boxAmount.setPreferredSize(new Dimension(100,100));
 		
 		JFormattedTextField amountField = new JFormattedTextField(createFormatter("##"));
-		amountField.setValue(boxNumber);
-		amountField.setColumns(3);
+		amountField.setColumns(2);
+		amountField.setValue(null);
 		amountField.addPropertyChangeListener("value", this);
 		
 		JButton addBoxes = new JButton("Make Array");
 		addBoxes.setBackground(Color.RED);
 		addBoxes.setOpaque(true);
 		addBoxes.setBorderPainted(false);
-		
 		addBoxes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(amountField.getText());
 			}
 		});
+		
 		boxAmount.add(amountField, BorderLayout.NORTH);
 		boxAmount.add(addBoxes, BorderLayout.SOUTH);
 		return boxAmount;
+	}
+	
+	private JPanel randomizer() {
+		JPanel randomizerBox = new JPanel();
+		randomizerBox.setPreferredSize(new Dimension(200, 100));
+		
+		JFormattedTextField minValue = new JFormattedTextField(createFormatter("####"));
+		minValue.setColumns(3);
+		minValue.setValue("0000");
+		minValue.addPropertyChangeListener("value", this);
+		
+		JFormattedTextField maxValue = new JFormattedTextField(createFormatter("####"));
+		maxValue.setColumns(3);
+		maxValue.setValue("9999");
+		maxValue.addPropertyChangeListener("value", this);
+		
+		JButton randomize = new JButton("Randomize");
+		randomize.setBackground(Color.RED);
+		randomize.setOpaque(true);
+		randomize.setBorderPainted(false);
+		randomize.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("min: " + minValue.getText() + "\nmax: " + maxValue.getText());
+			}
+		});
+		
+		randomizerBox.add(minValue, BorderLayout.WEST);
+		randomizerBox.add(maxValue, BorderLayout.EAST);
+		randomizerBox.add(randomize, BorderLayout.SOUTH);
+		return randomizerBox;
 	}
 	
 	protected MaskFormatter createFormatter(String s) {
