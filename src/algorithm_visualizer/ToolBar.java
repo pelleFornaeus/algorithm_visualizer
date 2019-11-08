@@ -11,11 +11,12 @@ import java.beans.PropertyChangeListener;
 public class ToolBar extends JFrame implements ActionListener, PropertyChangeListener {
 	
 	private JPanel toolBar = new JPanel();
-	private int boxNumber;
+	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	private String currentAlgorithm = "";
 	
 	public ToolBar() {
-		toolBar.setPreferredSize(new Dimension(600, 100));
-		toolBar.add(dropDownMenu(), BorderLayout.EAST);
+		toolBar.setPreferredSize(new Dimension(screenSize.width, 100));
+		toolBar.add(runBox(), BorderLayout.EAST);
 		toolBar.add(boxAmount(), BorderLayout.WEST);
 		toolBar.add(randomizer(), BorderLayout.CENTER);
 	}
@@ -28,10 +29,31 @@ public class ToolBar extends JFrame implements ActionListener, PropertyChangeLis
 			public void actionPerformed(ActionEvent e) {
 				JComboBox cb = (JComboBox)e.getSource();
 		        String algorithm = (String)cb.getSelectedItem();
+		        currentAlgorithm = algorithm;
 		        System.out.println(algorithm + " Selected");
 			}
 		});
 		return algorithmList;
+	}
+	
+	private JPanel runBox() {
+		JPanel runBox = new JPanel();
+		runBox.setPreferredSize(new Dimension(200, 100));
+		
+		JButton runButton = new JButton("Run");
+		runButton.setBackground(Color.RED);
+		runButton.setOpaque(true);
+		runButton.setBorderPainted(false);
+		runButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(currentAlgorithm + " ran");
+			}
+		});
+		
+		runBox.add(dropDownMenu(), BorderLayout.NORTH);
+		runBox.add(runButton, BorderLayout.SOUTH);
+		
+		return runBox;
 	}
 	
 	private JPanel boxAmount() {
@@ -108,7 +130,5 @@ public class ToolBar extends JFrame implements ActionListener, PropertyChangeLis
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		// TODO Auto-generated method stub
-		
 	}
 }
