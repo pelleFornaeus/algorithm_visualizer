@@ -1,4 +1,4 @@
-package algorithm_visualizer;
+package Frame;
 
 import java.awt.*;
 import javax.swing.*;

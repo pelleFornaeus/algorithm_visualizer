@@ -1,8 +1,7 @@
-package algorithm_visualizer;
+package Frame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
 public class Frame extends JFrame{
 	
