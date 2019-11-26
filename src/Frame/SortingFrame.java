@@ -1,7 +1,6 @@
 package Frame;
 
 import java.awt.*;
-import java.util.Random;
 import javax.swing.*;
 
 import Sorting_Algorithms.ValueList;
@@ -10,7 +9,6 @@ public class SortingFrame extends JFrame implements ArrayCreation {
 	
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private JPanel sortingFrame = new JPanel();
-	private Random random = new Random();
 	
 	public SortingFrame() {
 		sortingFrame.setPreferredSize(new Dimension(screenSize.width - 20, screenSize.height - 200));
@@ -47,11 +45,30 @@ public class SortingFrame extends JFrame implements ArrayCreation {
 	}
 	
 	public void randomizeElements(int min, int max) {
-		int currentIndex = 0;
 		for(Component textField : sortingFrame.getComponents()) {
 			int randomNumber = (int)(Math.random() * (max - min + 1)) + min;
 			if (textField instanceof JFormattedTextField) { 
 					((JFormattedTextField) textField).setText(Integer.toString(randomNumber));
+			}
+		}
+	}
+	
+	public void bubbleSort() {
+		JFormattedTextField previous = new JFormattedTextField();
+		previous.setText("0");
+		previous.setBackground(Color.YELLOW);
+		for(Component textField : sortingFrame.getComponents()) {
+			if (textField instanceof JFormattedTextField) { 
+				for(Component secondTextField : sortingFrame.getComponents()) {
+					if (Integer.parseInt(previous.getText()) > Integer.parseInt(((JFormattedTextField) secondTextField).getText())) 
+			        { 
+						String temp = previous.getText(); 
+						String currentText = (((JFormattedTextField) secondTextField).getText());
+			            previous.setText(currentText); 
+			            ((JFormattedTextField)secondTextField).setText(temp);
+			        } 
+					previous = (JFormattedTextField)secondTextField;
+				}
 			}
 		}
 	}
