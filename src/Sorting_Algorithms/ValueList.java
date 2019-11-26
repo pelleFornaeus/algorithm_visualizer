@@ -4,13 +4,25 @@ import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;
 
 public class ValueList {
+	
+	JFormattedTextField[] valueList;
+	
 	public ValueList(int numberOfValues) {
-		JFormattedTextField[] valueList = new JFormattedTextField[numberOfValues];
+		updateValueList(numberOfValues);
+	}
+	
+	public void updateValueList(int numberOfValues) {
+		valueList = new JFormattedTextField[numberOfValues];
 		for (int i = 0; i < numberOfValues; i++) {
-			valueList[i] = new JFormattedTextField(createFormatter("####"));
+			valueList[i] = new JFormattedTextField(createFormatter("###"));
 			valueList[i].setColumns(3);
 		}
 	}
+	
+	public JFormattedTextField[] getValueList() {
+		return valueList;
+	}
+	
 	protected MaskFormatter createFormatter(String s) {
 	    MaskFormatter formatter = null;
 	    try {

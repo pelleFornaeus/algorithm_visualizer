@@ -1,7 +1,11 @@
-package Frame;
+package ToolBar;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
+
+import Frame.ArrayCreation;
+import Frame.SortingFrame;
+import Sorting_Algorithms.ValueList;
 import java.awt.Dimension;
 import java.awt.*;
 import java.awt.event.*;
@@ -12,13 +16,16 @@ public class ToolBar extends JFrame implements ActionListener, PropertyChangeLis
 	
 	private JPanel toolBar = new JPanel();
 	private int min = 0;
-	private int max = 9999;
+	private int max = 999;
 	private int boxNumber = 0;
 	private String algorithm = "";
 	private JButton randomize;
 	private JButton addBoxes;
 	private JFormattedTextField maxValue;
 	private JFormattedTextField minValue;
+	private ArrayCreation arrayCreation;
+	private ValueList valueList;
+	private SortingFrame sortingFrame = new SortingFrame();
 	
 	public ToolBar() {
 		toolBar.setPreferredSize(new Dimension(800, 100));
@@ -66,7 +73,7 @@ public class ToolBar extends JFrame implements ActionListener, PropertyChangeLis
 		JPanel boxAmount = new JPanel();
 		boxAmount.setPreferredSize(new Dimension(100,100));
 		
-		JFormattedTextField amountField = new JFormattedTextField(createFormatter("##"));
+		JFormattedTextField amountField = new JFormattedTextField(createFormatter("###"));
 		amountField.setColumns(2);
 		amountField.setValue(null);
 		amountField.addPropertyChangeListener("value", this);
@@ -86,7 +93,8 @@ public class ToolBar extends JFrame implements ActionListener, PropertyChangeLis
 		addBoxes.setBorderPainted(false);
 		addBoxes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(amountField.getText());
+				//valueList = new ValueList(Integer.parseInt(amountField.getText()));
+				sortingFrame.createNewArray(Integer.parseInt(amountField.getText()));
 			}
 		});
 		
@@ -99,9 +107,9 @@ public class ToolBar extends JFrame implements ActionListener, PropertyChangeLis
 		JPanel randomizerBox = new JPanel();
 		randomizerBox.setPreferredSize(new Dimension(200, 100));
 		
-		minValue = new JFormattedTextField(createFormatter("####"));
-		minValue.setColumns(3);
-		minValue.setValue("0000");
+		minValue = new JFormattedTextField(createFormatter("###"));
+		minValue.setColumns(2);
+		minValue.setValue("000");
 		minValue.addPropertyChangeListener("value", this);
 		minValue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -114,9 +122,9 @@ public class ToolBar extends JFrame implements ActionListener, PropertyChangeLis
 			}
 		});
 		
-		maxValue = new JFormattedTextField(createFormatter("####"));
-		maxValue.setColumns(3);
-		maxValue.setValue("9999");
+		maxValue = new JFormattedTextField(createFormatter("###"));
+		maxValue.setColumns(2);
+		maxValue.setValue("999");
 		maxValue.setBackground(Color.YELLOW);
 		maxValue.addPropertyChangeListener("value", this);
 		maxValue.addActionListener(new ActionListener() {
@@ -172,6 +180,14 @@ public class ToolBar extends JFrame implements ActionListener, PropertyChangeLis
 	
 	public int getBoxNumber() {
 		return this.boxNumber;
+	}
+	
+	public SortingFrame getSortingFrame() {
+		return this.sortingFrame;
+	}
+	
+	public void setSortingFrame(SortingFrame sortingFrame) {
+		this.sortingFrame = sortingFrame;
 	}
 
 	@Override
