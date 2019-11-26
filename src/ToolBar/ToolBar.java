@@ -36,6 +36,7 @@ public class ToolBar extends JFrame implements ActionListener, PropertyChangeLis
 	
 	private JPanel runButtonDropDownBox() {
 		JPanel runButtonDropDownBox = new JPanel();
+		runButtonDropDownBox.setPreferredSize(new Dimension(200, 100));
 		runButtonDropDownBox.add(dropDownMenu(), BorderLayout.NORTH);
 		runButtonDropDownBox.add(runButton(), BorderLayout.SOUTH);
 		return runButtonDropDownBox;
@@ -105,7 +106,7 @@ public class ToolBar extends JFrame implements ActionListener, PropertyChangeLis
 	
 	private JPanel randomizer() {
 		JPanel randomizerBox = new JPanel();
-		randomizerBox.setPreferredSize(new Dimension(200, 100));
+		randomizerBox.setPreferredSize(new Dimension(100, 100));
 		
 		minValue = new JFormattedTextField(createFormatter("###"));
 		minValue.setColumns(2);
@@ -145,7 +146,7 @@ public class ToolBar extends JFrame implements ActionListener, PropertyChangeLis
 		randomize.setBorderPainted(false);
 		randomize.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("min: " + minValue.getText() + "\nmax: " + maxValue.getText());
+				sortingFrame.randomizeElements(min, max);
 			}
 		});
 		
