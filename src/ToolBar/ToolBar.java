@@ -64,7 +64,7 @@ public class ToolBar extends JFrame implements ActionListener, PropertyChangeLis
 		runButton.setBorderPainted(false);
 		runButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				sortingFrame.bubbleSort();
+				sortingFrame.bubbleSort2();
 				System.out.println(algorithm + " ran");
 			}
 		});		

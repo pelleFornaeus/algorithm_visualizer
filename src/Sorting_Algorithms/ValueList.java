@@ -20,7 +20,7 @@ public class ValueList {
 	}
 	
 	public JFormattedTextField[] getValueList() {
-		return valueList;
+		return this.valueList;
 	}
 	
 	protected MaskFormatter createFormatter(String s) {
