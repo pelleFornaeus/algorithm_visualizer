@@ -2,9 +2,7 @@ package ToolBar;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
-
-import Frame.ArrayCreation;
-import Frame.SortingFrame;
+import Frame.SortingPanel;
 import Sorting_Algorithms.ValueList;
 import java.awt.Dimension;
 import java.awt.*;
@@ -23,9 +21,7 @@ public class ToolBar extends JFrame implements ActionListener, PropertyChangeLis
 	private JButton addBoxes;
 	private JFormattedTextField maxValue;
 	private JFormattedTextField minValue;
-	private ArrayCreation arrayCreation;
-	private ValueList valueList;
-	private SortingFrame sortingFrame = new SortingFrame();
+	private SortingPanel SortingPanel = new SortingPanel();
 	
 	public ToolBar() {
 		toolBar.setPreferredSize(new Dimension(800, 100));
@@ -64,7 +60,7 @@ public class ToolBar extends JFrame implements ActionListener, PropertyChangeLis
 		runButton.setBorderPainted(false);
 		runButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				sortingFrame.bubbleSort2();
+				SortingPanel.bubbleSort2();
 				System.out.println(algorithm + " ran");
 			}
 		});		
@@ -96,7 +92,7 @@ public class ToolBar extends JFrame implements ActionListener, PropertyChangeLis
 		addBoxes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//valueList = new ValueList(Integer.parseInt(amountField.getText()));
-				sortingFrame.createNewArray(Integer.parseInt(amountField.getText()));
+				SortingPanel.createNewArray(Integer.parseInt(amountField.getText()));
 			}
 		});
 		
@@ -147,7 +143,7 @@ public class ToolBar extends JFrame implements ActionListener, PropertyChangeLis
 		randomize.setBorderPainted(false);
 		randomize.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				sortingFrame.randomizeElements(min, max);
+				SortingPanel.randomizeElements(min, max);
 			}
 		});
 		
@@ -184,12 +180,12 @@ public class ToolBar extends JFrame implements ActionListener, PropertyChangeLis
 		return this.boxNumber;
 	}
 	
-	public SortingFrame getSortingFrame() {
-		return this.sortingFrame;
+	public SortingPanel getSortingPanel() {
+		return this.SortingPanel;
 	}
 	
-	public void setSortingFrame(SortingFrame sortingFrame) {
-		this.sortingFrame = sortingFrame;
+	public void setSortingPanel(SortingPanel SortingPanel) {
+		this.SortingPanel = SortingPanel;
 	}
 
 	@Override
