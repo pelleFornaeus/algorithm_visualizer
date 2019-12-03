@@ -3,7 +3,6 @@ package ToolBar;
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import Frame.SortingPanel;
-import Sorting_Algorithms.ValueList;
 import java.awt.Dimension;
 import java.awt.*;
 import java.awt.event.*;
@@ -28,6 +27,7 @@ public class ToolBar extends JFrame implements ActionListener, PropertyChangeLis
 		toolBar.add(boxAmount(), BorderLayout.WEST);
 		toolBar.add(randomizer(), BorderLayout.CENTER);
 		toolBar.add(runButtonDropDownBox(), BorderLayout.EAST);
+		toolBar.add(casePanel());
 	}
 	
 	private JPanel runButtonDropDownBox() {
@@ -151,6 +151,32 @@ public class ToolBar extends JFrame implements ActionListener, PropertyChangeLis
 		randomizerBox.add(maxValue, BorderLayout.EAST);
 		randomizerBox.add(randomize, BorderLayout.SOUTH);
 		return randomizerBox;
+	}
+	private JPanel casePanel() {
+		JPanel casePanel = new JPanel();
+		
+		JButton bestCase = new JButton("Best Case");
+		bestCase.setBackground(Color.GREEN);
+		bestCase.setOpaque(true);
+		bestCase.setBorderPainted(false);
+		bestCase.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SortingPanel.bestCase();
+			}
+		});
+		
+		JButton worstCase = new JButton("Worst Case");
+		worstCase.setBackground(Color.GREEN);
+		worstCase.setOpaque(true);
+		worstCase.setBorderPainted(false);
+		worstCase.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SortingPanel.worstCase();
+			}
+		});
+		casePanel.add(bestCase);
+		casePanel.add(worstCase);
+		return casePanel;
 	}
 	
 	protected MaskFormatter createFormatter(String s) {

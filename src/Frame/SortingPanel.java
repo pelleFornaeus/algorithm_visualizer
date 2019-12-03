@@ -11,6 +11,7 @@ public class SortingPanel extends JFrame {
 	private JPanel sortingPanel = new JPanel();
 	private JFormattedTextField[] valueArray = new JFormattedTextField[999];
 	private int valueArraySize = 999;
+	private int comparisons = 0;
 	
 	public SortingPanel() {
 		sortingPanel.setPreferredSize(new Dimension(screenSize.width - 20, screenSize.height - 200));
@@ -57,13 +58,32 @@ public class SortingPanel extends JFrame {
 			}
 		}
 	}
+	
+	public void worstCase() {
+		int currentNumber = valueArraySize;
+		for(JFormattedTextField textField: valueArray) {
+			textField.setText(Integer.toString(currentNumber));
+			currentNumber--;
+		}
+	}
+	
+	public void bestCase() {
+		int currentNumber = 0;
+		for(JFormattedTextField textField: valueArray) {
+			textField.setText(Integer.toString(currentNumber));
+			currentNumber++;
+		}
+	}
+	
 	public void bubbleSort2() { 
+		comparisons = 0;
 		SwingWorker<Void, Integer> worker = new SwingWorker<Void, Integer>() {
 			@Override
 			protected Void doInBackground() throws Exception {
 				int j = 0;
 				for (int i = 0; i < valueArraySize-1; i++) {
 		            for (j = 0; j < valueArraySize-i-1; j++) {
+		            	comparisons++;
 		                if (Integer.parseInt(valueArray[j].getText().trim()) > Integer.parseInt(valueArray[j+1].getText().trim())) { 
 		                    int temp = Integer.parseInt(valueArray[j].getText());
 		                    publish(temp);
@@ -84,7 +104,7 @@ public class SortingPanel extends JFrame {
 
             @Override
             protected void done() {
-                System.out.println("Done");
+                System.out.println("Done in " + comparisons + " comparisons");
             }
 		}; 
 		worker.execute();
