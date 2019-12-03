@@ -1,9 +1,8 @@
 package Frame;
 
 import java.awt.*;
-
+import java.util.List;
 import javax.swing.*;
-
 import Sorting_Algorithms.ValueList;
 
 public class SortingPanel extends JFrame {
@@ -58,17 +57,36 @@ public class SortingPanel extends JFrame {
 			}
 		}
 	}
-	public void bubbleSort2() 
-    { 
-        for (int i = 0; i < valueArraySize-1; i++) 
-            for (int j = 0; j < valueArraySize-i-1; j++) 
-                if (Integer.parseInt(valueArray[j].getText().trim()) > Integer.parseInt(valueArray[j+1].getText().trim())) 
-                { 
-                    String temp = valueArray[j].getText(); 
-                    valueArray[j].setText(valueArray[j+1].getText());
-                    valueArray[j+1].setText(temp);
-                    repaint(20);
-                    System.out.println("loop step: " +  i + " " + j);
-                } 
-    }
+	public void bubbleSort2() { 
+		SwingWorker<Void, Integer> worker = new SwingWorker<Void, Integer>() {
+			@Override
+			protected Void doInBackground() throws Exception {
+				int j = 0;
+				for (int i = 0; i < valueArraySize-1; i++) {
+		            for (j = 0; j < valueArraySize-i-1; j++) {
+		                if (Integer.parseInt(valueArray[j].getText().trim()) > Integer.parseInt(valueArray[j+1].getText().trim())) { 
+		                    int temp = Integer.parseInt(valueArray[j].getText());
+		                    publish(temp);
+		                    valueArray[j].setText(valueArray[j+1].getText());
+		                    valueArray[j+1].setText(Integer.toString(temp));
+		                    System.out.println("loop step: " +  i + " " + j);
+		                } 
+		                valueArray[j+1].setBackground(Color.RED);
+		                Thread.sleep(10);
+		                valueArray[j+1].setBackground(Color.WHITE);
+		            }
+				}
+				return null;
+			}
+			@Override
+            protected void process(List<Integer> chunks) {
+            }
+
+            @Override
+            protected void done() {
+                System.out.println("Done");
+            }
+		}; 
+		worker.execute();
+	}
 }
