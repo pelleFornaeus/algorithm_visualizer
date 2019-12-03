@@ -12,6 +12,7 @@ public class SortingPanel extends JFrame {
 	private JFormattedTextField[] valueArray = new JFormattedTextField[999];
 	private int valueArraySize = 999;
 	private int comparisons = 0;
+	boolean swapped;
 	
 	public SortingPanel() {
 		sortingPanel.setPreferredSize(new Dimension(screenSize.width - 20, screenSize.height - 200));
@@ -68,7 +69,7 @@ public class SortingPanel extends JFrame {
 	}
 	
 	public void bestCase() {
-		int currentNumber = 0;
+		int currentNumber = 1;
 		for(JFormattedTextField textField: valueArray) {
 			textField.setText(Integer.toString(currentNumber));
 			currentNumber++;
@@ -82,19 +83,23 @@ public class SortingPanel extends JFrame {
 			protected Void doInBackground() throws Exception {
 				int j = 0;
 				for (int i = 0; i < valueArraySize-1; i++) {
+					swapped = false;
 		            for (j = 0; j < valueArraySize-i-1; j++) {
 		            	comparisons++;
 		                if (Integer.parseInt(valueArray[j].getText().trim()) > Integer.parseInt(valueArray[j+1].getText().trim())) { 
-		                    int temp = Integer.parseInt(valueArray[j].getText());
+		                    int temp = Integer.parseInt(valueArray[j].getText().trim());
 		                    publish(temp);
-		                    valueArray[j].setText(valueArray[j+1].getText());
+		                    valueArray[j].setText(valueArray[j+1].getText().trim());
 		                    valueArray[j+1].setText(Integer.toString(temp));
 		                    System.out.println("loop step: " +  i + " " + j);
+		                    swapped = true;
 		                } 
 		                valueArray[j+1].setBackground(Color.RED);
 		                Thread.sleep(10);
 		                valueArray[j+1].setBackground(Color.WHITE);
 		            }
+		            if(!swapped)
+		            	break;
 				}
 				return null;
 			}

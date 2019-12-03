@@ -152,6 +152,7 @@ public class ToolBar extends JFrame implements ActionListener, PropertyChangeLis
 		randomizerBox.add(randomize, BorderLayout.SOUTH);
 		return randomizerBox;
 	}
+	//Allows user to make an array of worst and best case scenarios. Currently only works for simple algorithms.
 	private JPanel casePanel() {
 		JPanel casePanel = new JPanel();
 		
