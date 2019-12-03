@@ -12,6 +12,7 @@ public class SortingPanel extends JFrame {
 	private JFormattedTextField[] valueArray = new JFormattedTextField[999];
 	private int valueArraySize = 999;
 	private int comparisons = 0;
+	int sortedElements;
 	boolean swapped;
 	
 	public SortingPanel() {
@@ -56,6 +57,7 @@ public class SortingPanel extends JFrame {
 			int randomNumber = (int)(Math.random() * (max - min + 1)) + min;
 			if (textField instanceof JFormattedTextField) { 
 					((JFormattedTextField) textField).setText(Integer.toString(randomNumber));
+					textField.setBackground(Color.WHITE);
 			}
 		}
 	}
@@ -64,6 +66,7 @@ public class SortingPanel extends JFrame {
 		int currentNumber = valueArraySize;
 		for(JFormattedTextField textField: valueArray) {
 			textField.setText(Integer.toString(currentNumber));
+			textField.setBackground(Color.WHITE);
 			currentNumber--;
 		}
 	}
@@ -72,11 +75,13 @@ public class SortingPanel extends JFrame {
 		int currentNumber = 1;
 		for(JFormattedTextField textField: valueArray) {
 			textField.setText(Integer.toString(currentNumber));
+			textField.setBackground(Color.WHITE);
 			currentNumber++;
 		}
 	}
 	
 	public void bubbleSort2() { 
+		sortedElements = valueArraySize - 1;
 		comparisons = 0;
 		SwingWorker<Void, Integer> worker = new SwingWorker<Void, Integer>() {
 			@Override
@@ -100,6 +105,11 @@ public class SortingPanel extends JFrame {
 		            }
 		            if(!swapped)
 		            	break;
+		            valueArray[sortedElements].setBackground(Color.GREEN);
+		            sortedElements--;
+				}
+				for(int i = 0; i < valueArraySize; i++) {
+					valueArray[i].setBackground(Color.GREEN);
 				}
 				return null;
 			}
